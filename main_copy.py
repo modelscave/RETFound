@@ -112,6 +112,8 @@ def get_args_parser():
     parser.add_argument("--task", default="", type=str, help="Task name for logging/output grouping")
     parser.add_argument("--adaptation", default="finetune", choices=["finetune", "lora", "lp"],
                         help="Adaptation strategy: finetune=full fine-tune, lora=LoRA adaptation, lp=linear probe (train head only)")
+    parser.add_argument("--lora_r", type=int, default=7, help="LoRA rank (only used if --adaptation=lora)")
+    parser.add_argument("--lora_alpha", type=int, default=14, help="LoRA alpha (only used if --adaptation=lora)")
 
     # ---- Dataset & paths
     parser.add_argument("--data_path", default="./data/", type=str)
@@ -339,9 +341,9 @@ def main(args):
     # ---- Adaptation toggle
     if args.adaptation == "lora":
         config = LoraConfig(
-            r=4,
-            lora_alpha=8,
-            target_modules=["qkv","proj"],
+            r=args.lora_r,
+            lora_alpha=args.lora_alpha,
+            target_modules=["qkv"],
             lora_dropout=0.1,
             bias="none",
             modules_to_save=["head"]

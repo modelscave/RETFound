@@ -3,18 +3,6 @@ __pycache__/
 
 examples/
 output_dir/
-output_dir_mae_0/
-output_dir_mae_0.5/
-output_dir_mae_1/
-output_dir_mae_1.5/
-output_dir_mae_2/
-output_dir_mae_2.5/
-output_dir_mae_3.0/
-output_dir_RETFound/
-output_dir_mae_lora_1/
-output_dir_mae_lora_2/
-output_dir_mae_lora_3/
-output_dir_mae_lora_2.5/
-output_dir_mae_lora_2-4/
-output_dir_mae_lora_4/
+output_dir_*/
+
 output_logs/

@@ -112,6 +112,7 @@ def get_args_parser():
     parser.add_argument("--task", default="", type=str, help="Task name for logging/output grouping")
     parser.add_argument("--adaptation", default="finetune", choices=["finetune", "lora", "lp"],
                         help="Adaptation strategy: finetune=full fine-tune, lora=LoRA adaptation, lp=linear probe (train head only)")
+                        
 
     # ---- Dataset & paths
     parser.add_argument("--data_path", default="/home/yash/rfmid_imagefolder", type=str)
