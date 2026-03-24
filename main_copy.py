@@ -114,6 +114,7 @@ def get_args_parser():
                         help="Adaptation strategy: finetune=full fine-tune, lora=LoRA adaptation, lp=linear probe (train head only)")
     parser.add_argument("--lora_r", type=int, default=7, help="LoRA rank (only used if --adaptation=lora)")
     parser.add_argument("--lora_alpha", type=int, default=14, help="LoRA alpha (only used if --adaptation=lora)")
+    parser.add_argument("--gamma", type=float, default=0.1, help="Gamma (for the focal loss)")
 
     # ---- Dataset & paths
     parser.add_argument("--data_path", default="./data/", type=str)
@@ -261,7 +262,7 @@ def main(args):
     
     alpha = torch.tensor(len(targets) / (len(class_counts) * class_counts), dtype=torch.float).to(device)
 
-    criterion = FocalLoss(alpha=alpha, gamma=2).to(device)
+    criterion = FocalLoss(alpha=alpha, gamma=args.gamma).to(device)
     # criterion = torch.nn.CrossEntropyLoss()
 
     num_tasks   = misc.get_world_size()
